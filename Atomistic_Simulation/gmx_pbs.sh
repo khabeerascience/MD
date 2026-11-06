@@ -11,17 +11,17 @@
 module load gromacs/2022
 
 # Define working directory and production run prefix
-#path='/storage/home/arjun/khabeera/peptide_simulation/2.2_DQ2.5_sec_3/'
-gmx_path='/storage/softare/gromacs-2022/bin/'
-
-gpu_id="MIG-7d12099a-0109-526e-8046-9af32cc49bd6"
+#Provide the path to the GROMACS (gmx) executable. You can find it by exploring the root directory.
+gmx_path='/gromacs-2022/bin/'
+# Set the GPU ID according to the cluster administrator's documentation.
+gpu_id="MIG-XXXXXXXXXX"
 
 # Loop through each PDB file in current directory
-pdb="minimized_frame0.pdb"
+pdb="protein.pdb" #provide your pdb here
 name="${pdb%.pdb}"
 echo "=== Processing $name ==="
 
-base_path="/storage/home/arjun/khabeera/Water_Dynamics/ecoli/fs_sim_tip4p/t1"
+base_path="/storage/home/ecoli/fs_sim_tip4p/t1"  #Working directory
 cd "$base_path"
 
 # Make a directory and move the pdb file
