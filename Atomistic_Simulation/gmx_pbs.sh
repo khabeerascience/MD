@@ -217,7 +217,7 @@ CUDA_VISIBLE_DEVICES=$gpu_id $gmx_path/gmx mdrun -deffnm $base_path/$name/npt -n
 $gmx_path/gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md.tpr
 
 # Run molecular dynamics simulation on specific GPU
-#CUDA_VISIBLE_DEVICES=$gpu_id $gmx_path/gmx mdrun -deffnm $base_path/$name/md -nb gpu -bonded gpu -pme gpu -ntmpi 1
+CUDA_VISIBLE_DEVICES=$gpu_id $gmx_path/gmx mdrun -deffnm $base_path/$name/md -nb gpu -bonded gpu -pme gpu -ntmpi 1
 
 print(f"✅ Completed {pdb_name}\n")
 
