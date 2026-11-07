@@ -1,0 +1,16 @@
+# Load force field
+source leaprc.protein.ff19SB
+source leaprc.water.tip4pew
+
+# Load the prepared PDB
+mol = loadpdb ecoli_cln.pdb
+
+# Solvate the box
+solvateOct mol TIP4PEWBOX 10.0
+
+# Add ions
+addIons mol Na+ 0
+
+# Save files
+saveamberparm mol ecoli.parm7 ecoli.rst7
+quit

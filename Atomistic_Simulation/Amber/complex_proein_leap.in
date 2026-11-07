@@ -1,0 +1,39 @@
+
+# Load force field
+source leaprc.protein.ff19SB
+source leaprc.water.tip3p
+# leaprc.gaff2: Loads the GAFF2 force field parameters for small organic molecules (ligands)
+source leaprc.gaff2
+
+# Load ligand molecule in mol2 format
+ATP = loadmol2 atp.mol2
+
+# Load the GAFF2 atom types and parameters generated for ligand using Antechamber and Parmchk2
+loadamberparams atp.frcmod
+
+# Load Joung-Cheatham ion parameters compatible with the TIP3P water model.
+# These parameters are used to describe monovalent ions (e.g., Na+ and Cl-)
+# in the system.
+loadamberparams frcmod.ionsjc_tip3p
+
+# In most cases, ion parameters are already available in the selected  force field. 
+#If the required ion parameters are not available, appropriate parameters should be obtained from the literature.
+# Load Mg2+ parameters based on the published parameterization by Allner et al.
+loadamberparams frcmod.mgnew
+
+# Prepare and clean the downloaded protein PDB structure for AMBER
+# compatibility using pdb4amber. This step helps standardize residue
+# and atom naming, identify structural issues, and prepare the
+# structure for subsequent AMBER parameterization.
+mol = loadpdb protein_complex.pdb
+
+# Solvate the box
+solvateBox mol TIP3PBOX 10.0
+
+# Add ions
+addIons mol Na+ 0
+
+# Save topology and initial coordinate file .parm7 and .rst7
+saveamberparm mol protein_complex.parm7 protein_complex.rst7
+quit
+
